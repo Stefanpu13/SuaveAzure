@@ -26,16 +26,21 @@ let allowCors : WebPart =
 
 
 [<EntryPoint>]
-let main argv = 
+let main [| port |] = 
     let webPart = 
         choose [            
             GET >=> path ("/api/voting") >=> OK "Votes"
         ]  
     
-    startWebServer 
-        ({defaultConfig with 
+//    let config =
+//        { defaultConfig with
+//              bindings = [ HttpBinding.create (uint16 port) ]
+//              listenTimeout = TimeSpan.FromMilliseconds 3000. }
+
+    let localConfig = 
+        {defaultConfig with 
             bindings = 
                 [ HttpBinding.createSimple HTTP "127.0.0.1" 8085]}
-        ) 
-        webPart
+        
+    startWebServer defaultConfig webPart
     0 // return an integer exit code
