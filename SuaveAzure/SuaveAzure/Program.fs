@@ -40,7 +40,7 @@ let main [| port |] =
     let localConfig = 
         {defaultConfig with 
             bindings = 
-                [ HttpBinding.createSimple HTTP "127.0.0.1" 8085]}
+                [ HttpBinding.createSimple HTTP "127.0.0.1" (int port)]}
         
-    startWebServer defaultConfig webPart
+    startWebServer localConfig webPart
     0 // return an integer exit code
