@@ -24,12 +24,12 @@ let allowCors : WebPart =
         //GET >=> setCORS            
     ]
 
-let baseUrl = path "/api"
+
 [<EntryPoint>]
 let main argv = 
     let webPart = 
         choose [            
-           GET >=> baseUrl >=> path "/voting" >=> OK "Votes"
+            GET >=> path ("/api/voting") >=> OK "Votes"
         ]  
     
     startWebServer 
